@@ -23,7 +23,7 @@ namespace AsyncStackTrace
         /// <remarks>
         /// The async-friendly formatting is archieved by:
         /// * Skipping all awaiter frames (all methods in types implementing <see cref="INotifyCompletion"/>).
-        /// * Inferring the original method name from the async machine state class (<see cref="IAsyncStateMachine"/>)
+        /// * Inferring the original method name from the async state machine class (<see cref="IAsyncStateMachine"/>)
         ///   and removing the "MoveNext" - currently only for C#.
         /// * Adding the "async" prefix after "at" on each line for async invocations.
         /// * Appending "(?)" to the method signature to indicate that parameter information is missing.
