@@ -1,6 +1,6 @@
 # Async Stack Trace
 
-Async-friendly format for stack traces and exceptions
+Async-friendly format for stack traces and exceptions.
 
 ```
 System.Exception: Crash! Boom! Bang!
@@ -32,6 +32,8 @@ The main formatting work is done by the `StackTraceExtensions.ToAsyncString` ext
 * Removing the "End of stack trace from previous location..." text.
 
 ## Example outputs
+
+In all the examples, OLD refrers to `ToString()` output, while new is `ToAsyncString()`.
 
 * [Example 1](docs/Example1.md): A simple 3 async method chain.
 * [Example 2](docs/Example2_Wait.md): Async invocations with a synchronous `Wait()` in the middle, causing an `AggregateException`.
