@@ -11,6 +11,12 @@ System.Exception: Crash! Boom! Bang!
    at AsyncFriendlyStackTrace.Test.Program.Run[TExample](TextWriter writer) in C:\Source\Repos\AsyncFriendlyStackTrace\src\AsyncFriendlyStackTrace.Test\Program.cs:line 45
 ```
 
+## Install
+
+```powershell
+Install-Package AsyncFriendlyStackTrace
+```
+
 ## Usage
 
 To format exceptions, use the extension methods in `ExceptionExtensions`:
