@@ -1,11 +1,17 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 
 namespace AsyncStackTrace.Test
 {
     public class Program
     {
+        private static bool _outputToFile;
+
         public static void Main(string[] args)
         {
+            _outputToFile = args.Any(arg => string.Equals(arg, "/file", StringComparison.OrdinalIgnoreCase));
+
             Run<Example1>();
             Run<Example2_Wait>();
             Run<Example3_BadSerialization>();
@@ -15,23 +21,46 @@ namespace AsyncStackTrace.Test
         private static void Run<TExample>()
             where TExample : IExample, new()
         {
-            Console.WriteLine($"============== {typeof(TExample).Name} ==============");
-            Console.WriteLine();
+            if (_outputToFile)
+            {
+                using (var writer = File.CreateText($"{typeof (TExample).Name}.md"))
+                {
+                    Run<TExample>(writer);
+                }
+            }
+            else
+            {
+                Run<TExample>(Console.Out);
+            }
+        }
+
+        private static void Run<TExample>(TextWriter writer)
+            where TExample : IExample, new()
+        {
+            var name = typeof(TExample).Name;
+            writer.WriteLine(name);
+            writer.WriteLine(new string('=', name.Length));
             try
             {
                 new TExample().Run().GetAwaiter().GetResult();
             }
             catch (Exception e)
             {
-                Console.WriteLine("======= OLD =======");
-                Console.WriteLine(e.ToString());
-                Console.WriteLine();
+                writer.WriteLine("OLD");
+                writer.WriteLine("---");
+                writer.WriteLine("```");
+                writer.WriteLine(e.ToString());
+                writer.WriteLine("```");
+                writer.WriteLine();
 
-                Console.WriteLine("======= NEW =======");
-                Console.WriteLine(e.ToAsyncString());
+                writer.WriteLine("NEW");
+                writer.WriteLine("---");
+                writer.WriteLine("```");
+                writer.WriteLine(e.ToAsyncString());
+                writer.WriteLine("```");
             }
-            Console.WriteLine();
-            Console.WriteLine();
+            writer.WriteLine();
+            writer.WriteLine();
         }
     }
 }
