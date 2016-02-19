@@ -2,6 +2,15 @@
 
 Async-friendly format for stack traces and exceptions
 
+```
+System.Exception: Crash! Boom! Bang!
+   at async AsyncStackTrace.Test.Example1.C(?) in C:\Source\Repos\asyncstacktrace\src\AsyncStackTrace.Test\Example1.cs:line 26
+   at async AsyncStackTrace.Test.Example1.B(?) in C:\Source\Repos\asyncstacktrace\src\AsyncStackTrace.Test\Example1.cs:line 20
+   at async AsyncStackTrace.Test.Example1.A(?) in C:\Source\Repos\asyncstacktrace\src\AsyncStackTrace.Test\Example1.cs:line 15
+   at async AsyncStackTrace.Test.Example1.Run(?) in C:\Source\Repos\asyncstacktrace\src\AsyncStackTrace.Test\Example1.cs:line 10
+   at AsyncStackTrace.Test.Program.Run[TExample](TextWriter writer) in C:\Source\Repos\asyncstacktrace\src\AsyncStackTrace.Test\Program.cs:line 45
+```
+
 ## Usage
 
 To format exceptions, use the extension methods in `ExceptionExtensions`:
