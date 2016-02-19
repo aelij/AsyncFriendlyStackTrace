@@ -1,6 +1,6 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": " Async-friendly format for stack traces and exceptions",
+  "description": "Async-friendly format for stack traces and exceptions",
   "authors": [ "Eli Arbel" ],
   "tags": [ "async", "await", "stack track", "stacktrace", "exception" ],
   "projectUrl": "https://github.com/aelij/asyncstacktrace",
