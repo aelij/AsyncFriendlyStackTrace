@@ -1,0 +1,23 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": " Async-friendly format for stack traces and exceptions",
+  "authors": [ "Eli Arbel" ],
+  "tags": [ "async", "await", "stack track", "stacktrace", "exception" ],
+  "projectUrl": "https://github.com/aelij/asyncstacktrace",
+  "licenseUrl": "https://raw.githubusercontent.com/aelij/asyncstacktrace/master/LICENSE",
+
+  "frameworks": {
+    "net451": { },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Runtime": "4.0.21-beta-23516",
+        "System.Threading": "4.0.11-beta-23516",
+        "System.Diagnostics.StackTrace": "4.0.1-beta-23516",
+        "System.Reflection": "4.1.0-beta-23516"
+      }
+    }
+  }
+}
