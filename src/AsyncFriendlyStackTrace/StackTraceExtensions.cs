@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Text;
 
-namespace AsyncStackTrace
+namespace AsyncFriendlyStackTrace
 {
     /// <summary>
     /// Provides extension methods for <see cref="StackTrace"/>.

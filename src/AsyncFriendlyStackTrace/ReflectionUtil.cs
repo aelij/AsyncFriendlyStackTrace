@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace AsyncStackTrace
+namespace AsyncFriendlyStackTrace
 {
     internal static class ReflectionUtil
     {

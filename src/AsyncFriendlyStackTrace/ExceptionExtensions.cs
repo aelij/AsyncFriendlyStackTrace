@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 
-namespace AsyncStackTrace
+namespace AsyncFriendlyStackTrace
 {
     /// <summary>
     /// Provides extension methods for <see cref="Exception"/>.
@@ -11,7 +11,7 @@ namespace AsyncStackTrace
     {
         private const string EndOfInnerExceptionStack = "--- End of inner exception stack trace ---";
         private const string AggregateExceptionFormatString = "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
-        private const string AsyncStackTraceExceptionData = "AsyncStackTrace";
+        private const string AsyncStackTraceExceptionData = "AsyncFriendlyStackTrace";
 
         private static readonly Func<Exception, string> GetStackTraceString =
             ReflectionUtil.GenerateGetField<Exception, string>("_stackTraceString");

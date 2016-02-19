@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace AsyncStackTrace.Test
+namespace AsyncFriendlyStackTrace.Test
 {
     public class Program
     {

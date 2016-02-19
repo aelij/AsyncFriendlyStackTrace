@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace AsyncStackTrace.Test
+namespace AsyncFriendlyStackTrace.Test
 {
     internal class Example3_BadSerialization : IExample
     {

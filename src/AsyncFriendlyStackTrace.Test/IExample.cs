@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AsyncStackTrace.Test
+namespace AsyncFriendlyStackTrace.Test
 {
     internal interface IExample
     {

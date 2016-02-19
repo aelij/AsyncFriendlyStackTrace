@@ -1,6 +1,6 @@
 {
   "version": "1.0.0-*",
-  "description": "AsyncStackTrace.Test Console Application",
+  "description": "AsyncFriendlyStackTrace.Test Console Application",
   "authors": [ "aelij" ],
   "tags": [ "" ],
   "projectUrl": "",
@@ -11,11 +11,11 @@
   },
 
   "dependencies": {
-    "AsyncStackTrace": "1.0.0-*"
+    "AsyncFriendlyStackTrace": "1.0.0-*"
   },
 
   "commands": {
-    "AsyncStackTrace.Test": "AsyncStackTrace.Test"
+    "AsyncFriendlyStackTrace.Test": "AsyncFriendlyStackTrace.Test"
   },
 
   "frameworks": {

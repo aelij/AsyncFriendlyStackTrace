@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace AsyncStackTrace.Test
+namespace AsyncFriendlyStackTrace.Test
 {
     internal class Example2_Wait : IExample
     {

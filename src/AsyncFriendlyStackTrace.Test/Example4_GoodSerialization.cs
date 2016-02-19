@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AsyncStackTrace.Test
+namespace AsyncFriendlyStackTrace.Test
 {
     internal class Example4_GoodSerialization : Example3_BadSerialization
     {

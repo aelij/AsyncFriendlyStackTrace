@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AsyncStackTrace.Test")]
+[assembly: AssemblyTitle("AsyncFriendlyStackTrace")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AsyncStackTrace.Test")]
+[assembly: AssemblyProduct("AsyncFriendlyStackTrace")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,4 +20,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b2436320-65be-44a3-9e08-c3cb78bf5d34")]
+[assembly: Guid("2a4a7e6d-05de-40fc-b77e-9bf388599ec0")]
