@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "1.1.0-*",
   "description": "Async-friendly format for stack traces and exceptions",
   "authors": [ "Eli Arbel" ],
   "tags": [ "async", "await", "stack track", "stacktrace", "exception" ],
