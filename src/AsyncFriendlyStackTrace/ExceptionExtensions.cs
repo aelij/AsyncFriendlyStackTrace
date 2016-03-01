@@ -118,7 +118,7 @@ namespace AsyncFriendlyStackTrace
             return remoteStackTrace + stackTrace;
         }
 		
-		// see http://www.mono-project.com/docs/gui/winforms/porting-winforms-applications/#runtime-conditionals
+	// see http://www.mono-project.com/docs/gui/winforms/porting-winforms-applications/#runtime-conditionals
         private static bool IsRunningOnMono()
         {
             return Type.GetType("Mono.Runtime") != null;
