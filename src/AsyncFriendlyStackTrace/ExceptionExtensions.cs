@@ -13,8 +13,8 @@ namespace AsyncFriendlyStackTrace
         private const string AggregateExceptionFormatString = "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
         private const string AsyncStackTraceExceptionData = "AsyncFriendlyStackTrace";
 
-        private static readonly Func<Exception, string> GetStackTraceString =
-            ReflectionUtil.GenerateGetField<Exception, string>("_stackTraceString");
+        private static Func<Exception, string> GetStackTraceString => 
+            ReflectionUtil.GenerateGetField<Exception, string>(EnvironmentUtil.IsRunningOnMono() ? "stack_trace" : "_stackTraceString");
 
         private static readonly Func<Exception, string> GetRemoteStackTraceString =
             ReflectionUtil.GenerateGetField<Exception, string>("_remoteStackTraceString");
