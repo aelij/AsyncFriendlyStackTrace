@@ -14,7 +14,7 @@ namespace AsyncFriendlyStackTrace
         private const string AsyncStackTraceExceptionData = "AsyncFriendlyStackTrace";
 
         private static Func<Exception, string> GetStackTraceString => 
-            ReflectionUtil.GenerateGetField<Exception, string>(IsRunningOnMono() ? "stack_trace" : "_stackTraceString");
+            ReflectionUtil.GenerateGetField<Exception, string>(EnvironmentUtil.IsRunningOnMono() ? "stack_trace" : "_stackTraceString");
 
         private static readonly Func<Exception, string> GetRemoteStackTraceString =
             ReflectionUtil.GenerateGetField<Exception, string>("_remoteStackTraceString");
@@ -116,12 +116,6 @@ namespace AsyncFriendlyStackTrace
                              new StackTrace(exception, true).ToAsyncString();
             var remoteStackTrace = GetRemoteStackTraceString(exception);
             return remoteStackTrace + stackTrace;
-        }
-		
-	// see http://www.mono-project.com/docs/gui/winforms/porting-winforms-applications/#runtime-conditionals
-        private static bool IsRunningOnMono()
-        {
-            return Type.GetType("Mono.Runtime") != null;
         }
     }
 }
