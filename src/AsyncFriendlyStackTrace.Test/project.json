@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0-*",
+  "version": "1.2.0-*",
   "description": "AsyncFriendlyStackTrace.Test Console Application",
   "authors": [ "aelij" ],
   "tags": [ "" ],
@@ -11,7 +11,7 @@
   },
 
   "dependencies": {
-    "AsyncFriendlyStackTrace": "1.1.0-*"
+    "AsyncFriendlyStackTrace": "1.2.0-*"
   },
 
   "commands": {
@@ -23,6 +23,17 @@
       "frameworkAssemblies": {
         "System.Runtime.Serialization": "4.0.0.0",
         "System.Xml": "4.0.0.0"
+      }
+    },
+    "dotnet5.4": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23516",
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Console": "4.0.0-beta-23516",
+        "System.Linq": "4.0.1-beta-23516",
+        "System.Threading": "4.0.11-beta-23516",
+        "System.Runtime.Serialization.Xml": "4.1.0-beta-23516",
+        "System.Xml.ReaderWriter": "4.0.11-beta-23516"
       }
     },
     "dnxcore50": {
