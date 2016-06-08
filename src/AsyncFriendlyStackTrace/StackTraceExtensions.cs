@@ -44,8 +44,11 @@ namespace AsyncFriendlyStackTrace
             foreach (var frame in stackFrames)
             {
                 var method = frame.GetMethod();
+                
+                if (method == null) continue;
+                var declaringType = method.DeclaringType?.GetTypeInfo();
                 // skip awaiters
-                if (method == null || typeof(INotifyCompletion).IsAssignableFrom(method.DeclaringType)) continue;
+                if (declaringType != null && typeof(INotifyCompletion).GetTypeInfo().IsAssignableFrom(declaringType)) continue;
 
                 if (firstFrame)
                 {
@@ -57,7 +60,6 @@ namespace AsyncFriendlyStackTrace
                 }
                 stringBuilder.AppendFormat(CultureInfo.InvariantCulture, "   {0} ", AtString);
 
-                var declaringType = method.DeclaringType;
                 var isAsync = FormatMethodName(stringBuilder, declaringType);
                 if (!isAsync)
                 {
@@ -68,10 +70,10 @@ namespace AsyncFriendlyStackTrace
                         FormatGenericArguments(stringBuilder, methodInfo.GetGenericArguments());
                     }
                 }
-                else if (declaringType.GetTypeInfo().IsGenericType)
+                else if (declaringType?.IsGenericType == true)
                 {
                     // ReSharper disable once PossibleNullReferenceException
-                    FormatGenericArguments(stringBuilder, declaringType.GetGenericArguments());
+                    FormatGenericArguments(stringBuilder, declaringType.GenericTypeArguments);
                 }
                 stringBuilder.Append("(");
                 if (isAsync)
@@ -88,12 +90,12 @@ namespace AsyncFriendlyStackTrace
             return stringBuilder.ToString();
         }
 
-        private static bool FormatMethodName(StringBuilder stringBuilder, Type declaringType)
+        private static bool FormatMethodName(StringBuilder stringBuilder, TypeInfo declaringType)
         {
             if (declaringType == null) return false;
             var isAsync = false;
             var fullName = declaringType.FullName.Replace('+', '.');
-            if (typeof(IAsyncStateMachine).IsAssignableFrom(declaringType))
+            if (typeof(IAsyncStateMachine).GetTypeInfo().IsAssignableFrom(declaringType))
             {
                 isAsync = true;
                 stringBuilder.Append(AsyncMethodPrefix);
