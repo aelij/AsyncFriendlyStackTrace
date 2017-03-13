@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 
 namespace AsyncFriendlyStackTrace
 {
@@ -72,7 +73,7 @@ namespace AsyncFriendlyStackTrace
         private static string ToAsyncAggregateString(Exception exception, AggregateException aggregate)
         {
             var s = ToAsyncStringCore(exception, includeMessageOnly: true);
-            for (int i = 0; i < aggregate.InnerExceptions.Count; i++)
+            for (var i = 0; i < aggregate.InnerExceptions.Count; i++)
             {
                 s = string.Format(CultureInfo.InvariantCulture, AggregateExceptionFormatString, s,
                     Environment.NewLine, i, aggregate.InnerExceptions[i].ToAsyncString(), "<---", Environment.NewLine);
@@ -84,7 +85,7 @@ namespace AsyncFriendlyStackTrace
         {
             var message = exception.Message;
             var className = exception.GetType().ToString();
-            var s = message.Length <= 0 ? className : className + ": " + message;
+            var builder = new StringBuilder(message.Length <= 0 ? className : className + ": " + message);
 
             var innerException = exception.InnerException;
             if (innerException != null)
@@ -93,20 +94,19 @@ namespace AsyncFriendlyStackTrace
                 {
                     do
                     {
-                        s += " ---> " + innerException.Message;
+                        builder.Append($" ---> {{{innerException.Message}}}");
                         innerException = innerException.InnerException;
                     } while (innerException != null);
                 }
                 else
                 {
-                    s += " ---> " + innerException.ToAsyncString() + Environment.NewLine +
-                         "   " + EndOfInnerExceptionStack;
+                    builder.Append($" ---> {{{innerException.ToAsyncString()}}}{Environment.NewLine}   {{{EndOfInnerExceptionStack}}}");
                 }
             }
 
-            s += Environment.NewLine + GetAsyncStackTrace(exception);
+            builder.Append($"{{{Environment.NewLine}}}{{{GetAsyncStackTrace(exception)}}}");
 
-            return s;
+            return builder.ToString();
         }
 
         private static string GetAsyncStackTrace(Exception exception)

@@ -161,7 +161,7 @@ namespace AsyncFriendlyStackTrace
                 // ReSharper disable once ConstantConditionalAccessQualifier
                 // ReSharper disable once ConstantNullCoalescingCondition
                 var typeName = t.ParameterType?.Name ?? "<UnknownType>";
-                stringBuilder.Append(typeName + " " + t.Name);
+                stringBuilder.Append($"{typeName} {t.Name}");
             }
         }
 
