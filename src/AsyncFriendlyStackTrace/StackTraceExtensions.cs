@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Security;
 using System.Text;
 
@@ -48,7 +49,12 @@ namespace AsyncFriendlyStackTrace
                 if (method == null) continue;
                 var declaringType = method.DeclaringType?.GetTypeInfo();
                 // skip awaiters
-                if (declaringType != null && typeof(INotifyCompletion).GetTypeInfo().IsAssignableFrom(declaringType)) continue;
+                if (declaringType != null &&
+                    (typeof(INotifyCompletion).GetTypeInfo().IsAssignableFrom(declaringType) ||
+                     method.DeclaringType == typeof(ExceptionDispatchInfo)))
+                {
+                    continue;
+                }
 
                 if (firstFrame)
                 {
