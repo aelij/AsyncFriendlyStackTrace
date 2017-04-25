@@ -27,10 +27,10 @@ exception.ToAsyncString();
 
 ```
 
-This produces an async-friendly format, as you can see in the examples below. There is also special handling for `AggregateException`s.
+This produces an async-friendly format, as you can see in the examples below. There is also special handling for `AggregateException`s and `ReflectionTypeLoadException` (which can contain multiple inner exceptions).
 
 The main formatting work is done by the `StackTraceExtensions.ToAsyncString` extension method. The async-friendly formatting is archieved by:
-* Skipping all awaiter frames (all methods in types implementing `INotifyCompletion`).
+* Skipping all awaiter frames (all methods in types implementing `INotifyCompletion`) and `ExceptionDispatchInfo` frames.
 * Inferring the original method name from the async state machine class (`IAsyncStateMachine`)
   and removing the "MoveNext" - currently only for C#.
 * Adding the "async" prefix after "at" on each line for async invocations.
