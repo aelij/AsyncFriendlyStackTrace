@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 
 namespace AsyncFriendlyStackTrace
 {
@@ -29,11 +31,12 @@ namespace AsyncFriendlyStackTrace
         {
             if (exception == null) throw new ArgumentNullException(nameof(exception));
 
-            var aggregate = exception as AggregateException;
-            if (aggregate != null)
+            var innerExceptions = GetInnerExceptions(exception);
+            if (innerExceptions != null)
             {
-                return ToAsyncAggregateString(exception, aggregate);
+                return ToAsyncAggregateString(exception, innerExceptions);
             }
+
             return ToAsyncStringCore(exception, includeMessageOnly: false);
         }
 
@@ -55,10 +58,10 @@ namespace AsyncFriendlyStackTrace
 
             exception.Data[AsyncStackTraceExceptionData] = GetAsyncStackTrace(exception);
 
-            var aggregate = exception as AggregateException;
-            if (aggregate != null)
+            var innerExceptions = GetInnerExceptions(exception);
+            if (innerExceptions != null)
             {
-                foreach (var innerException in aggregate.InnerExceptions)
+                foreach (var innerException in innerExceptions)
                 {
                     innerException.PrepareForAsyncSerialization();
                 }
@@ -69,13 +72,28 @@ namespace AsyncFriendlyStackTrace
             }
         }
 
-        private static string ToAsyncAggregateString(Exception exception, AggregateException aggregate)
+        private static IList<Exception> GetInnerExceptions(Exception exception)
+        {
+            if (exception is AggregateException aggregateException)
+            {
+                return aggregateException.InnerExceptions;
+            }
+
+            if (exception is ReflectionTypeLoadException reflectionTypeLoadException)
+            {
+                return reflectionTypeLoadException.LoaderExceptions;
+            }
+
+            return null;
+        }
+
+        private static string ToAsyncAggregateString(Exception exception, IList<Exception> inner)
         {
             var s = ToAsyncStringCore(exception, includeMessageOnly: true);
-            for (int i = 0; i < aggregate.InnerExceptions.Count; i++)
+            for (var i = 0; i < inner.Count; i++)
             {
                 s = string.Format(CultureInfo.InvariantCulture, AggregateExceptionFormatString, s,
-                    Environment.NewLine, i, aggregate.InnerExceptions[i].ToAsyncString(), "<---", Environment.NewLine);
+                    Environment.NewLine, i, inner[i].ToAsyncString(), "<---", Environment.NewLine);
             }
             return s;
         }
