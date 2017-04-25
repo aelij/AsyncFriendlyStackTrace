@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>AsyncFriendlyStackTrace.Test Console Application</Description>
+    <VersionPrefix>1.5.0</VersionPrefix>
+    <Authors>aelij</Authors>
+    <TargetFramework>net45</TargetFramework>
+    <AssemblyName>AsyncFriendlyStackTrace.Test</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>AsyncFriendlyStackTrace.Test</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AsyncFriendlyStackTrace\AsyncFriendlyStackTrace.csproj" />
+  </ItemGroup>
+
+</Project>
