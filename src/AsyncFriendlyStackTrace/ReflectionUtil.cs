@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace AsyncFriendlyStackTrace
 {
@@ -16,6 +18,11 @@ namespace AsyncFriendlyStackTrace
         {
             var param = Expression.Parameter(typeof(TOwner));
             return Expression.Lambda<Func<TOwner, TField>>(Expression.Field(param, fieldName), param).Compile();
+        }
+
+        internal static bool HasField<T>(string field)
+        {
+            return typeof(T).GetRuntimeFields().Any(x => x.Name == field);
         }
     }
 }
