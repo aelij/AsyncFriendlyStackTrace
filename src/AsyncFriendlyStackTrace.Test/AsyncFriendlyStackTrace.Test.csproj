@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>AsyncFriendlyStackTrace.Test Console Application</Description>
-    <VersionPrefix>1.5.0</VersionPrefix>
+    <VersionPrefix>1.6.0</VersionPrefix>
     <Authors>aelij</Authors>
     <TargetFramework>net45</TargetFramework>
     <AssemblyName>AsyncFriendlyStackTrace.Test</AssemblyName>

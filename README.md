@@ -4,6 +4,8 @@ Async-friendly format for stack traces and exceptions.
 
 [![NuGet](https://img.shields.io/nuget/v/AsyncFriendlyStackTrace.svg)](https://www.nuget.org/packages/AsyncFriendlyStackTrace/)
 
+Also check out Ben's [Demystifier](https://github.com/benaadams/Ben.Demystifier/) which resolves async, iterators, tuples, location functions and more.
+
 ```
 System.Exception: Crash! Boom! Bang!
    at async AsyncFriendlyStackTrace.Test.Example1.C(?) in C:\Source\Repos\AsyncFriendlyStackTrace\src\AsyncFriendlyStackTrace.Test\Example1.cs:line 26

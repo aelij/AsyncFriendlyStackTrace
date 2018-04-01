@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>Async-friendly format for stack traces and exceptions</Description>
-    <VersionPrefix>1.5.0</VersionPrefix>
+    <VersionPrefix>1.6.0</VersionPrefix>
     <Authors>Eli Arbel</Authors>
     <TargetFrameworks>netstandard1.3;net45</TargetFrameworks>
     <AssemblyName>AsyncFriendlyStackTrace</AssemblyName>
