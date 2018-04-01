@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 
 namespace AsyncFriendlyStackTrace
@@ -15,8 +16,12 @@ namespace AsyncFriendlyStackTrace
         private const string AggregateExceptionFormatString = "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
         private const string AsyncStackTraceExceptionData = "AsyncFriendlyStackTrace";
 
+        private static Lazy<string> StackTraceFieldNameGuesser = new Lazy<string>(
+            () => EnvironmentUtil.IsRunningOnMono()
+                && ReflectionUtil.HasField<Exception>("stack_trace") ? "stack_trace" : "_stackTraceString");
+
         private static Func<Exception, string> GetStackTraceString => 
-            ReflectionUtil.GenerateGetField<Exception, string>(EnvironmentUtil.IsRunningOnMono() ? "stack_trace" : "_stackTraceString");
+            ReflectionUtil.GenerateGetField<Exception, string>(StackTraceFieldNameGuesser.Value);
 
         private static readonly Func<Exception, string> GetRemoteStackTraceString =
             ReflectionUtil.GenerateGetField<Exception, string>("_remoteStackTraceString");
