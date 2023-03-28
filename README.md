@@ -1,4 +1,4 @@
-# Async-Friendly Stack Trace
+# Async-Friendly Stack Trace [Archived - no longer needed on .NET 5+]
 
 Async-friendly format for stack traces and exceptions.
 
