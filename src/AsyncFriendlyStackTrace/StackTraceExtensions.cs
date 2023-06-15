@@ -14,6 +14,16 @@ namespace AsyncFriendlyStackTrace
     /// </summary>
     public static class StackTraceExtensions
     {
+        #if NET6_0_OR_GREATER
+
+        /// <summary>
+        /// Produces an async-friendly readable representation of the stack trace. On .NET 6+ just calls <see cref="StackTrace.ToString"/>.
+        /// </summary>
+        [Obsolete("This package is no longer needed. Use StackTrace.ToString() instead.")]
+        public static string ToAsyncString(this StackTrace stackTrace) => stackTrace.ToString();
+
+        #else
+
         private const string AtString = "at";
         private const string LineFormat = "in {0}:line {1}";
         private const string AsyncMethodPrefix = "async ";
@@ -77,7 +87,6 @@ namespace AsyncFriendlyStackTrace
                 }
                 else if (declaringType?.IsGenericType == true)
                 {
-                    // ReSharper disable once PossibleNullReferenceException
                     FormatGenericArguments(stringBuilder, declaringType.GenericTypeArguments);
                 }
                 stringBuilder.Append("(");
@@ -163,8 +172,6 @@ namespace AsyncFriendlyStackTrace
                 {
                     firstParam = false;
                 }
-                // ReSharper disable once ConstantConditionalAccessQualifier
-                // ReSharper disable once ConstantNullCoalescingCondition
                 var typeName = t.ParameterType?.Name ?? "<UnknownType>";
                 stringBuilder.Append(typeName + " " + t.Name);
             }
@@ -190,5 +197,6 @@ namespace AsyncFriendlyStackTrace
             }
             stringBuilder.Append("]");
         }
+        #endif
     }
 }

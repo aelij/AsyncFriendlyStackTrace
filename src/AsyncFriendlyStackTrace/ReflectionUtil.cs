@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NET6_0_OR_GREATER
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -26,3 +27,4 @@ namespace AsyncFriendlyStackTrace
         }
     }
 }
+#endif

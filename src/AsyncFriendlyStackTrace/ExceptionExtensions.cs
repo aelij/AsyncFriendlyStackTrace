@@ -11,11 +11,27 @@ namespace AsyncFriendlyStackTrace
     /// </summary>
     public static class ExceptionExtensions
     {
+        #if NET6_0_OR_GREATER
+
+        /// <summary>
+        /// Gets an async-friendly <see cref="Exception"/> string using <see cref="StackTraceExtensions.ToAsyncString"/>. On .NET 6+ just calls <see cref="Exception.ToString"/>.
+        /// </summary>
+        [Obsolete("This package is no longer needed. Use Exception.ToString() instead.")]
+        public static string ToAsyncString(this Exception exception) => exception.ToString();
+
+        /// <summary>
+        /// Prepares an <see cref="Exception"/> for serialization by including the async-friendly stack trace. On .NET 6+ is a no-op.
+        /// </summary>
+        [Obsolete("This package is no longer needed.")]
+        public static void PrepareForAsyncSerialization(this Exception exception) {}
+
+        #else
+
         private const string EndOfInnerExceptionStack = "--- End of inner exception stack trace ---";
         private const string AggregateExceptionFormatString = "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
         private const string AsyncStackTraceExceptionData = "AsyncFriendlyStackTrace";
 
-        private static Lazy<string> StackTraceFieldNameGuesser = new Lazy<string>(
+        private static readonly Lazy<string> StackTraceFieldNameGuesser = new Lazy<string>(
             () => EnvironmentUtil.IsRunningOnMono()
                 && ReflectionUtil.HasField<Exception>("stack_trace") ? "stack_trace" : "_stackTraceString");
 
@@ -139,5 +155,7 @@ namespace AsyncFriendlyStackTrace
             var remoteStackTrace = GetRemoteStackTraceString(exception);
             return remoteStackTrace + stackTrace;
         }
+
+        #endif
     }
 }

@@ -1,4 +1,7 @@
-# Async-Friendly Stack Trace [Archived - no longer needed on .NET 5+]
+# Async-Friendly Stack Trace
+
+## Archived - no longer needed on .NET 5+
+Note I have released version `1.7.0` of this package for .NET 6+ that basically calls `StackTrace.ToString()` and `Exception.ToString()` and adds `Obsolete` attributes, to alert users it is no longer needed.
 
 Async-friendly format for stack traces and exceptions.
 
